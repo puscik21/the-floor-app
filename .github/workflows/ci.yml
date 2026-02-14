@@ -2,9 +2,9 @@ name: CI Pipeline
 
 on:
   push:
-    branches: [ main, master, develop ]
+    branches: [ '**' ]  # Run on all branches
   pull_request:
-    branches: [ main, master, develop ]
+    branches: [ '**' ]  # Run on all PRs
 
 jobs:
   build-and-test:
