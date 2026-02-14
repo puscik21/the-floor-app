@@ -10,8 +10,10 @@
 
     <!-- Best Practices -->
     <rule ref="category/java/bestpractices.xml">
-        <exclude name="JUnitAssertionsShouldIncludeMessage"/>
-        <exclude name="JUnitTestContainsTooManyAsserts"/>
+        <exclude name="GuardLogStatement"/>
+        <exclude name="UnitTestAssertionsShouldIncludeMessage"/>
+        <exclude name="UnitTestContainsTooManyAsserts"/>
+        <exclude name="UnitTestShouldIncludeAssert"/>
     </rule>
 
     <!-- Code Style -->
@@ -22,8 +24,6 @@
         <exclude name="ShortVariable"/>
         <exclude name="ShortClassName"/>
         <exclude name="CommentDefaultAccessModifier"/>
-        <exclude name="DefaultPackage"/>
-        <exclude name="CallSuperInConstructor"/>
         <exclude name="LocalVariableCouldBeFinal"/>
         <exclude name="MethodArgumentCouldBeFinal"/>
     </rule>
@@ -32,6 +32,7 @@
     <rule ref="category/java/design.xml">
         <exclude name="LawOfDemeter"/>
         <exclude name="LoosePackageCoupling"/>
+        <exclude name="UseUtilityClass"/>
     </rule>
 
     <!-- Documentation -->
@@ -43,8 +44,7 @@
 
     <!-- Error Prone -->
     <rule ref="category/java/errorprone.xml">
-        <exclude name="BeanMembersShouldSerialize"/>
-        <exclude name="DataflowAnomalyAnalysis"/>
+        <exclude name="UnnecessaryBooleanAssertion"/>
     </rule>
 
     <!-- Performance -->

@@ -1,14 +1,13 @@
 package com.thefloorapp.controller;
 
 import com.thefloorapp.service.HelloService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -31,8 +30,7 @@ class HelloControllerTest {
 
         String result = helloController.sayHello();
 
-        assert result.equals(expectedMessage);
+        assertThat(result).isEqualTo(expectedMessage);
         verify(helloService).recordHelloAndGetMessage();
     }
 }
-
