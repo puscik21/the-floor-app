@@ -33,6 +33,7 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok:1.18.42")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.mockito:mockito-core")
+    testImplementation("org.assertj:assertj-core:3.24.2")
 }
 
 tasks.test {
@@ -50,4 +51,3 @@ checkstyle {
     toolVersion = "10.13.0"
     configFile = file("config/checkstyle/checkstyle.xml")
 }
-

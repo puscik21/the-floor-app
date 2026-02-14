@@ -9,7 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -38,7 +38,7 @@ class HelloServiceTest {
 
         String result = helloService.recordHelloAndGetMessage();
 
-        assertEquals("Hello! This endpoint has been called 1 time.", result);
+        assertThat(result).isEqualTo("Hello! This endpoint has been called 1 time.");
         verify(helloEntryRepository).save(any(HelloEntry.class));
         verify(helloEntryRepository).count();
     }
@@ -50,7 +50,7 @@ class HelloServiceTest {
 
         String result = helloService.recordHelloAndGetMessage();
 
-        assertEquals("Hello! This endpoint has been called 5 times.", result);
+        assertThat(result).isEqualTo("Hello! This endpoint has been called 5 times.");
         verify(helloEntryRepository).save(any(HelloEntry.class));
         verify(helloEntryRepository).count();
     }
@@ -61,8 +61,7 @@ class HelloServiceTest {
 
         long count = helloService.getCount();
 
-        assertEquals(10L, count);
+        assertThat(count).isEqualTo(10L);
         verify(helloEntryRepository).count();
     }
 }
-

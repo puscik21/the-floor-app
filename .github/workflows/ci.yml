@@ -3,13 +3,17 @@ name: CI Pipeline
 on:
   push:
     branches: [ '**' ]  # Run on all branches
-  pull_request:
-    branches: [ '**' ]  # Run on all PRs
 
 jobs:
   build-and-test:
     name: Build and Test
     runs-on: ubuntu-latest
+
+    # For 'Publish test results' step
+    permissions:
+      checks: write #
+      pull-requests: write
+      contents: read
 
     steps:
     - name: Checkout code

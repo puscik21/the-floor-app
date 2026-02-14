@@ -7,6 +7,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -29,8 +30,7 @@ class HelloControllerTest {
 
         String result = helloController.sayHello();
 
-        assert result.equals(expectedMessage);
+        assertThat(result).isEqualTo(expectedMessage);
         verify(helloService).recordHelloAndGetMessage();
     }
 }
-
