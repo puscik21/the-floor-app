@@ -17,12 +17,15 @@ spring:
     show-sql: true
 
   # H2 Console (optional, for debugging)
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
+  # Note: In Spring Boot 4.x, H2 console is auto-configured when H2 is on classpath
+  # Access at: http://localhost:8080/h2-console
+  # JDBC URL: jdbc:h2:mem:thefloordb
+
+  # Web Configuration
+  web:
+    resources:
+      static-locations: classpath:/static/ # Serve static content
 
 # Server Configuration
 server:
   port: 8080
-
