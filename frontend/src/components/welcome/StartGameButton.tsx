@@ -2,9 +2,18 @@ import {motion} from "framer-motion";
 import {styled} from "@mui/material/styles";
 import {Button} from "@mui/material";
 import {useGameContext} from "../../context/GameContext.tsx";
+import {fetchTest} from "../../api/testApi.ts";
+import {notifySuccess} from "../../utils/toast/notifier.tsx";
 
 const StartGameButton = () => {
     const handleStartGame = useGameContext().actions.handleStartGame;
+
+    // TODO: test purposes only, to be removed
+    const handleStartGameTest = async () => {
+        const result = await fetchTest()
+        result && notifySuccess(result)
+        handleStartGame()
+    }
 
     return (
         <motion.div
@@ -15,7 +24,7 @@ const StartGameButton = () => {
             <StartButton
                 variant="contained"
                 size="large"
-                onClick={handleStartGame}
+                onClick={handleStartGameTest}
             >
                 Rozpocznij
             </StartButton>
