@@ -23,12 +23,9 @@ export interface GeneralState {
 
 export type GameState = 'init' | 'floor' | 'ready' | 'duel' | 'finished' | 'podium';
 
-export interface PlayerBase {
+export interface Player {
     name: string;
     category: string;
-}
-
-export interface Player extends PlayerBase {
     isPlaying: boolean;
     winStreak: number;
     duelsWon: number;

@@ -1,8 +1,8 @@
 import {useCallback, useEffect, useState} from 'react';
-import type {GameConfig, GameGrid, GameState, GridCell, MapState, Player, PlayerBase} from '../types';
+import type {GameConfig, GameGrid, GameState, GridCell, MapState, Player} from '../types';
 import {initializeGrid} from '../components/floor/gridUtils.ts';
 import {notifyWarning} from "../utils/toast/notifier.tsx";
-import {fetchJson} from "../utils/input/configFilesUtils.ts";
+import {fetchPlayers} from "../api/playersApi.ts";
 
 interface GameMapStateResult {
     mapState: MapState;
@@ -28,7 +28,7 @@ export const useGameMapState = (
 
     useEffect(() => {
         if (gameState === 'init') {
-            fetchJson<PlayerBase[]>("./players.json", []).then(playersConfig => {
+            fetchPlayers().then(playersConfig => {
                 setGrid(initializeGrid(playersConfig, gameConfig.shufflePlayers));
                 const initializedPlayers: Player[] = playersConfig.map(playerBase => ({
                     ...playerBase,
