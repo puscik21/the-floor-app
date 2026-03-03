@@ -1,18 +1,18 @@
-import type {GameGrid, PlayerBase} from '../../types.ts';
+import type {GameGrid, Player} from '../../types.ts';
 
 type Dimensions = {
     rows: number;
     cols: number
 }
 
-export function initializeGrid(players: PlayerBase[], shufflePlayers: boolean): GameGrid {
+export function initializeGrid(players: Player[], shufflePlayers: boolean): GameGrid {
     const numPlayers = players.length;
     if (numPlayers === 0) return [];
 
     const {rows, cols} = calculateGridDimensions(numPlayers);
     const totalCells = rows * cols;
 
-    const cellOwners: (PlayerBase | null)[] = shufflePlayers ? [...players].sort(() => Math.random() - 0.5) : [...players];
+    const cellOwners: (Player | null)[] = shufflePlayers ? [...players].sort(() => Math.random() - 0.5) : [...players];
     while (cellOwners.length < totalCells) {
         cellOwners.push(null); // Fill with empty cells
     }

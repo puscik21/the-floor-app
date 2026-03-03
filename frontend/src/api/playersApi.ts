@@ -1,11 +1,10 @@
 import api from "./apiInstance.ts";
 import {notifyError} from "../utils/toast/notifier.tsx";
-import type {PlayerBase} from "../types.ts";
+import type {Player} from "../types.ts";
 
-// TODO: Use 'Player' type
-export const fetchPlayers = async (): Promise<PlayerBase[]> => {
+export const fetchPlayers = async (): Promise<Player[]> => {
     try {
-        const response = await api.get<PlayerBase[]>("/players");
+        const response = await api.get<Player[]>("/players");
         return response.data;
     } catch (error) {
         notifyError("Error while fetching players", error)
