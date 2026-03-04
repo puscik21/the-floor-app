@@ -29,10 +29,15 @@ repositories {
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-websocket")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+
     compileOnly("org.projectlombok:lombok:1.18.42")
+
     runtimeOnly("com.h2database:h2")
+
     annotationProcessor("org.projectlombok:lombok:1.18.42")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.mockito:mockito-core")
     testImplementation("org.assertj:assertj-core:3.27.7")

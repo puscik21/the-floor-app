@@ -14,6 +14,7 @@ export interface GameContextValue {
     duel: DuelInfo;
     actions: GameActions;
     config: GameConfig;
+    socket: SocketState;
 }
 
 export interface GeneralState {
@@ -79,7 +80,12 @@ export interface GameActions {
     handleCorrectAnswer: () => void;
     handlePass: () => void;
     handlePassFloorClick: () => void;
-    findPlayerByName: (name: string) => Player | undefined
+    findPlayerByName: (name: string) => Player | undefined;
+    sendStartGame: (playerName?: string) => void;
+}
+
+export interface SocketState {
+    socketStatus: SocketStatus;
 }
 
 export interface PodiumPlayer {
@@ -90,3 +96,17 @@ export interface PodiumPlayer {
 }
 
 export type PodiumPosition = 1 | 2 | 3;
+
+// ─── WebSocket / STOMP Message Types ─────────────────────────────────────────
+
+export type SocketStatus = 'disconnected' | 'connecting' | 'connected' | 'error';
+
+export interface StartGameRequest {
+    playerName: string;
+}
+
+export interface GameStartedEvent {
+    message: string;
+    triggeredBy: string;
+}
+
