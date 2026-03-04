@@ -1,38 +1,61 @@
 import {motion} from "framer-motion";
 import {styled} from "@mui/material/styles";
-import {Button} from "@mui/material";
+import {Box, Button, Tooltip, Typography} from "@mui/material";
 import {useGameContext} from "../../context/GameContext.tsx";
-import {fetchTest} from "../../api/testApi.ts";
-import {notifySuccess} from "../../utils/toast/notifier.tsx";
+
+const STATUS_LABEL: Record<string, string> = {
+    connected: '🟢 Połączono',
+    connecting: '🟡 Łączenie…',
+    disconnected: '🔴 Rozłączono',
+    error: '🔴 Błąd połączenia',
+};
 
 const StartGameButton = () => {
-    const handleStartGame = useGameContext().actions.handleStartGame;
+    const {actions, socket} = useGameContext();
+    const {socketStatus} = socket;
 
-    // TODO: test purposes only, to be removed
-    const handleStartGameTest = async () => {
-        const result = await fetchTest()
-        result && notifySuccess(result)
-        handleStartGame()
-    }
+    const handleClick = () => {
+        actions.sendStartGame('Narrator');
+        actions.handleStartGame();
+    };
 
     return (
-        <motion.div
-            initial={{scale: 0.8, opacity: 0}}
-            animate={{scale: 1, opacity: 1}}
-            transition={{delay: 1.4, duration: 0.8}}
-        >
-            <StartButton
-                variant="contained"
-                size="large"
-                onClick={handleStartGameTest}
+        <Container>
+            <motion.div
+                initial={{scale: 0.8, opacity: 0}}
+                animate={{scale: 1, opacity: 1}}
+                transition={{delay: 1.4, duration: 0.8}}
             >
-                Rozpocznij
-            </StartButton>
-        </motion.div>
-    )
-}
+                <StartButton
+                    variant="contained"
+                    size="large"
+                    onClick={handleClick}
+                >
+                    Rozpocznij
+                </StartButton>
+            </motion.div>
+
+            <motion.div
+                initial={{opacity: 0}}
+                animate={{opacity: 1}}
+                transition={{delay: 1.8, duration: 0.6}}
+            >
+                <Tooltip title="Status połączenia WebSocket">
+                    <StatusLabel>{STATUS_LABEL[socketStatus] ?? socketStatus}</StatusLabel>
+                </Tooltip>
+            </motion.div>
+        </Container>
+    );
+};
 
 export default StartGameButton;
+
+const Container = styled(Box)`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+`;
 
 const StartButton = styled(Button)`
     margin-top: 32px;
@@ -52,3 +75,11 @@ const StartButton = styled(Button)`
         color: white;
     }
 `;
+
+const StatusLabel = styled(Typography)`
+    font-size: 0.8rem;
+    opacity: 0.6;
+    cursor: default;
+    user-select: none;
+`;
+

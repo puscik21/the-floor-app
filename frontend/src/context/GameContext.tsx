@@ -4,6 +4,7 @@ import {useGameDuelState} from './useGameDuelState.ts';
 import {useGameMapState} from './useGameMapState.ts';
 import {notifyError} from "../utils/toast/notifier.tsx";
 import {fetchJson} from "../utils/input/configFilesUtils.ts";
+import useGameSocket from "../api/useGameSocket.ts";
 
 const GameContext = createContext<GameContextValue | undefined>(undefined);
 
@@ -81,6 +82,8 @@ export const GameContextProvider = ({children}: { children: React.ReactNode }) =
         duelActions.addTimeBoostsToPlayerTimer(duelPlayer);
     }, [duelActions, mapActions]);
 
+    const {socketStatus, sendStartGame} = useGameSocket();
+
     const value: GameContextValue = {
         general: {
             gameState,
@@ -92,10 +95,12 @@ export const GameContextProvider = ({children}: { children: React.ReactNode }) =
             handleStartGame,
             handleStartDuel,
             activateTimeBoostForPlayer,
+            sendStartGame,
             ...mapActions,
             ...duelActions,
         },
-        config: gameConfig
+        config: gameConfig,
+        socket: {socketStatus},
     };
 
     return (
