@@ -2,11 +2,10 @@ import { motion } from "framer-motion";
 import { styled } from "@mui/material/styles";
 import { Typography } from "@mui/material";
 
-// TODO: move to game/components/welcome
 const MovingSubtitle = () => {
     return (
         <motion.div
-            initial={{ opacity: 0 }}
+            initial={{opacity: 0}}
             animate={{
                 opacity: 1,
                 y: [0, -10, 0],
@@ -22,7 +21,7 @@ const MovingSubtitle = () => {
                 ],
             }}
             transition={{
-                opacity: { delay: 0.8, duration: 1 },
+                opacity: {delay: 0.8, duration: 1},
                 y: {
                     delay: 1.2,
                     duration: 2.6,
@@ -44,7 +43,7 @@ const MovingSubtitle = () => {
             }}
         >
             <SubtitleText variant="h5">
-                POLE. DECYZJA. SEKUNDA.<br />
+                POLE. DECYZJA. SEKUNDA.<br/>
                 Reszta to konsekwencje.
             </SubtitleText>
         </motion.div>

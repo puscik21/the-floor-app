@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { styled } from "@mui/material/styles";
 import { Box, Button, Tooltip, Typography } from "@mui/material";
-import { useGameContext } from "../../context/GameContext";
+import { useGameContext } from "../../../../context/GameContext";
 
 const STATUS_LABEL: Record<string, string> = {
     connected: "🟢 Połączono",
@@ -10,7 +10,6 @@ const STATUS_LABEL: Record<string, string> = {
     error: "🔴 Błąd połączenia",
 };
 
-// TODO: move to game/components/welcome
 const StartGameButton = () => {
     const { actions, socket } = useGameContext();
     const { socketStatus } = socket;

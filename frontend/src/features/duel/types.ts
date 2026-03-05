@@ -1,6 +1,4 @@
-import type { Player } from "../player/types";
-
-export type { Player } from "../player/types";
+import type {Player} from "../../shared/types";
 
 export type DuelPlayer = "challenger" | "defender";
 

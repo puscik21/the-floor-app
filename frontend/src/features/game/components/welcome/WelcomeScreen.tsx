@@ -1,8 +1,8 @@
 import { Box, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import TitleLogo from "../../../../shared/components/TitleLogo";
-import MovingSubtitle from "../../../../shared/components/MovingSubtitle";
-import StartGameButton from "../../../../shared/components/StartGameButton";
+import TitleLogo from "./TitleLogo";
+import MovingSubtitle from "./MovingSubtitle";
+import StartGameButton from "./StartGameButton";
 
 const WelcomeScreen = () => {
     return (

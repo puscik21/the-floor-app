@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import type { DuelInfo, DuelPlayer, GameDuelStateResult, Question } from "../types";
-import type { GameConfig, GameState } from "../../../shared/types";
-import type { Player } from "../../player/types";
+import type {GameConfig, GameState, Player} from "../../../shared/types";
 import { getImageFromCategory } from "../components/question/questionUtils";
 import { checkImageExists } from "../components/question/imageLoader";
 import { notifyWarning } from "../../../shared/utils/toast/notifier";

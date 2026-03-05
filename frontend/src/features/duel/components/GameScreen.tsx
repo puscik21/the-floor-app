@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import PlayersSection from "../../player/components/PlayersSection";
+import PlayersSection from "./PlayersSection";
 import ActionsSection from "./ActionsSection";
 import QuestionCategorySection from "./question/QuestionCategorySection";
 import QuestionSection from "./question/QuestionSection";

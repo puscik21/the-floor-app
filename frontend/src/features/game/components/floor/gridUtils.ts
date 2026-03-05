@@ -1,4 +1,5 @@
-import type { GameGrid, Player } from "../../types";
+import type { GameGrid } from "../../types";
+import type {Player} from "../../../../shared/types";
 
 type Dimensions = {
     rows: number;

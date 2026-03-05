@@ -2,7 +2,6 @@ import { styled } from "@mui/material/styles";
 import { motion } from "framer-motion";
 import { Typography } from "@mui/material";
 
-// TODO: move to game/components/welcome
 const TitleLogo = () => (
     <TitleContainer
         initial={{ opacity: 0, y: -400 }}

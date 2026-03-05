@@ -1,10 +1,7 @@
-import type { Player } from "../features/player/types";
-import type { DuelInfo, DuelPlayer } from "../features/duel/types";
-import type { MapState, SocketStatus } from "../features/game/types";
-import type { GridCell } from "../features/game/types";
+import type {DuelInfo, DuelPlayer} from "../features/duel/types";
+import type {GridCell, MapState, SocketStatus} from "../features/game/types";
 
-export type { Player } from "../features/player/types";
-export type { DuelPlayer } from "../features/duel/types";
+export type {DuelPlayer} from "../features/duel/types";
 
 export interface GameConfig {
     initTimeSeconds: number;
@@ -36,6 +33,16 @@ export interface GameActions {
     sendStartGame: (playerName?: string) => void;
 }
 
+export interface Player {
+    name: string;
+    category: string;
+    isPlaying: boolean;
+    winStreak: number;
+    duelsWon: number;
+    timeBoostsAvailable: number;
+    timeBoostsUsed: number;
+}
+
 export interface SocketState {
     socketStatus: SocketStatus;
 }
@@ -48,4 +55,3 @@ export interface GameContextValue {
     config: GameConfig;
     socket: SocketState;
 }
-

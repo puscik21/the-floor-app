@@ -1,9 +1,10 @@
-import { Box, Typography } from "@mui/material";
-import { styled } from "@mui/material/styles";
-import type { Player, PodiumPlayer, PodiumPosition } from "../../types";
+import {Box, Typography} from "@mui/material";
+import {styled} from "@mui/material/styles";
+import type {PodiumPlayer, PodiumPosition} from "../../types";
 import PodiumStep from "./PodiumStep";
-import { useGameContext } from "../../../../context/GameContext";
+import {useGameContext} from "../../../../context/GameContext";
 import ConfettiOverlay from "../../../../shared/utils/confetti/ConfettiOverlay";
+import type {Player} from "../../../../shared/types";
 
 const mapPlayerToPodiumPlayer = (position: PodiumPosition, player: Player): PodiumPlayer => {
     return {
@@ -27,13 +28,13 @@ const PodiumScreen = () => {
 
     return (
         <EndGameScreenWrapper>
-            <ConfettiOverlay duration={60000} initialBurst={200} zIndex={50} />
+            <ConfettiOverlay duration={60000} initialBurst={200} zIndex={50}/>
             <Title variant="h2">ZWYCIĘZCY!</Title>
 
             <PodiumContainer>
-                {secondPlace && <PodiumStep player={secondPlace} />}
-                {firstPlace && <PodiumStep player={firstPlace} />}
-                {thirdPlace && <PodiumStep player={thirdPlace} />}
+                {secondPlace && <PodiumStep player={secondPlace}/>}
+                {firstPlace && <PodiumStep player={firstPlace}/>}
+                {thirdPlace && <PodiumStep player={thirdPlace}/>}
             </PodiumContainer>
 
             <ThanksForGameText variant="h4">Dziękujemy za grę!</ThanksForGameText>

@@ -2,7 +2,6 @@ import { styled } from "@mui/material/styles";
 import { Box, Card, CardContent, Typography } from "@mui/material";
 import { useGameContext } from "../../../context/GameContext";
 
-// TODO: move to features/duel/components
 const PlayersSection = () => {
     const {
         challengerTimer,
