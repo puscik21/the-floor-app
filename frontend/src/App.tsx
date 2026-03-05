@@ -1,8 +1,8 @@
-import {CssBaseline, ThemeProvider} from '@mui/material';
-import {darkTheme} from './theme/theme';
-import {GameContextProvider} from './context/GameContext.tsx';
-import GameContent from './components/GameContent.tsx';
-import {ToastContainer} from "react-toastify";
+import { CssBaseline, ThemeProvider } from '@mui/material';
+import { ToastContainer } from "react-toastify";
+import { darkTheme } from "./shared/theme/theme";
+import GameContent from "./features/game/components/GameContent";
+import { GameContextProvider } from "./context/GameContext";
 
 function App() {
     return (

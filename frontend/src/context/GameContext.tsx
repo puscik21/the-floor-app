@@ -1,10 +1,10 @@
 import {createContext, useCallback, useContext, useEffect, useRef, useState} from 'react';
-import type {DuelPlayer, GameConfig, GameContextValue, GameState, Player} from '../types';
-import {useGameDuelState} from './useGameDuelState.ts';
-import {useGameMapState} from './useGameMapState.ts';
-import {notifyError} from "../utils/toast/notifier.tsx";
-import {fetchJson} from "../utils/input/configFilesUtils.ts";
-import useGameSocket from "../api/useGameSocket.ts";
+import type {DuelPlayer, GameConfig, GameContextValue, GameState, Player} from '../shared/types';
+import {useGameDuelState} from '../features/duel/hooks/useGameDuelState';
+import {useGameMapState} from '../features/game/hooks/useGameMapState';
+import {notifyError} from "../shared/utils/toast/notifier";
+import {fetchJson} from "../shared/utils/input/configFilesUtils";
+import useGameSocket from "../features/game/hooks/useGameSocket";
 
 const GameContext = createContext<GameContextValue | undefined>(undefined);
 
