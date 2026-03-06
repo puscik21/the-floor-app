@@ -1,5 +1,7 @@
-package com.thefloorapp.player;
+package com.thefloorapp.player.api;
 
+import com.thefloorapp.player.domain.Player;
+import com.thefloorapp.player.domain.PlayerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

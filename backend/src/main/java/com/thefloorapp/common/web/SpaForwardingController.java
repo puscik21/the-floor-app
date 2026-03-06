@@ -1,4 +1,4 @@
-package com.thefloorapp.common.adapter.in.web;
+package com.thefloorapp.common.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

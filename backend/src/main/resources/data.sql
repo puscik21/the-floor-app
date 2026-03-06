@@ -1,5 +1,7 @@
-DELETE
-FROM player;
+DELETE FROM game_state;
+DELETE FROM player;
+
+INSERT INTO game_state (id, state) VALUES (1, 'INIT');
 
 INSERT INTO player (name, category, is_playing, win_streak, duels_won, time_boosts_available, time_boosts_used)
 VALUES ('Madzia', 'Wędkarstwo', true, 0, 0, 3, 0),

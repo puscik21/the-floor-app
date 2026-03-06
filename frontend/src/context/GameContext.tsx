@@ -5,6 +5,7 @@ import {useGameMapState} from '../features/game/hooks/useGameMapState';
 import {notifyError} from "../shared/utils/toast/notifier";
 import {fetchJson} from "../shared/utils/input/configFilesUtils";
 import useGameSocket from "../features/game/hooks/useGameSocket";
+import {fetchGameState, updateGameState} from "../shared/api/gameStateApi";
 
 const GameContext = createContext<GameContextValue | undefined>(undefined);
 
@@ -19,19 +20,32 @@ const defaultGameConfig: GameConfig = {
 };
 
 export const GameContextProvider = ({children}: { children: React.ReactNode }) => {
-    const [gameState, setGameState] = useState<GameState>('init');
+    const [gameState, setGameStateLocal] = useState<GameState>('init');
     const [winner, setWinner] = useState<Player | null>(null);
     const [gameConfig, setGameConfig] = useState<GameConfig>(defaultGameConfig); // TODO: fix - always first duel goes with default config ._.
 
     useEffect(() => {
         fetchJson<GameConfig>("./config.json", defaultGameConfig).then(config => {
             setGameConfig(config);
-        })
+        });
+    }, []);
+
+    useEffect(() => {
+        fetchGameState().then(setGameStateLocal);
+    }, []);
+
+    const setGameState = useCallback((state: GameState) => {
+        setGameStateLocal(state);
+        updateGameState(state);
+    }, []);
+
+    const handleServerGameStateChange = useCallback((state: GameState) => {
+        setGameStateLocal(state);
     }, []);
 
     const handleSetWinner = useCallback((player: Player | null) => setWinner(player), []);
-    const handleStartGame = useCallback(() => setGameState('floor'), []);
-    const handleStartDuel = useCallback(() => setGameState('duel'), []);
+    const handleStartGame = useCallback(() => setGameState('floor'), [setGameState]);
+    const handleStartDuel = useCallback(() => setGameState('duel'), [setGameState]);
 
     // To omit circular dependencies
     const prepareDuelRef = useRef<((challenger: Player, defender: Player) => void)>(undefined);
@@ -75,14 +89,14 @@ export const GameContextProvider = ({children}: { children: React.ReactNode }) =
         if (mapState.allPlayers.filter(player => player.isPlaying).length == 1) {
             setGameState('podium')
         }
-    }, [mapState.allPlayers, mapState.positionToPlayer]);
+    }, [mapState.allPlayers, mapState.positionToPlayer, setGameState]);
 
     const activateTimeBoostForPlayer = useCallback((playerName: string, duelPlayer: DuelPlayer) => {
         mapActions.decreaseTimeBoostsOfPlayer(playerName);
         duelActions.addTimeBoostsToPlayerTimer(duelPlayer);
     }, [duelActions, mapActions]);
 
-    const {socketStatus, sendStartGame} = useGameSocket();
+    const {socketStatus, sendStartGame} = useGameSocket(handleServerGameStateChange);
 
     const value: GameContextValue = {
         general: {

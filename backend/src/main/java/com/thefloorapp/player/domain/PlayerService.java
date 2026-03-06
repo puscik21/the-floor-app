@@ -1,5 +1,6 @@
-package com.thefloorapp.player;
+package com.thefloorapp.player.domain;
 
+import com.thefloorapp.player.infrastructure.PlayerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
