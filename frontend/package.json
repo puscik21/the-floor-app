@@ -13,11 +13,13 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mui/material": "^5.16.4",
+    "@reduxjs/toolkit": "^2.11.2",
     "@stomp/stompjs": "^7.3.0",
     "axios": "^1.13.5",
     "framer-motion": "^12.23.25",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "react-redux": "^9.2.0",
     "react-toastify": "^11.0.5",
     "sockjs-client": "^1.6.1"
   },
