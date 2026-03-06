@@ -1,4 +1,4 @@
-package com.thefloorapp.game;
+package com.thefloorapp.game.api;
 
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;

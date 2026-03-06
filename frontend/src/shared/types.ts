@@ -13,6 +13,7 @@ export interface GameConfig {
     shufflePlayers: boolean;
 }
 
+// based on: backend/src/main/java/com/thefloorapp/game/GameStateValue.java
 export type GameState = "init" | "floor" | "ready" | "duel" | "finished" | "podium";
 
 export interface GeneralState {

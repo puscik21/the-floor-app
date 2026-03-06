@@ -1,0 +1,10 @@
+GET http://localhost:8080/api/game/state
+
+
+###
+PUT http://localhost:8080/api/game/state
+Content-Type: application/json
+
+{
+  "state": "init"
+}

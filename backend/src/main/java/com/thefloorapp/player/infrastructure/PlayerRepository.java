@@ -1,5 +1,6 @@
-package com.thefloorapp.player;
+package com.thefloorapp.player.infrastructure;
 
+import com.thefloorapp.player.domain.Player;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
