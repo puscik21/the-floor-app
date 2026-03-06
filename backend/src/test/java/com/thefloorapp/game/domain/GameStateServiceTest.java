@@ -36,7 +36,7 @@ class GameStateServiceTest {
         @Test
         void shouldReturnCurrentState() {
             // given
-            var persistedState = new GameState(GameStateService.GAME_STATE_ID, GameStateValue.INIT);
+            GameState persistedState = new GameState(GameStateService.GAME_STATE_ID, GameStateValue.INIT);
             when(gameStateRepository.findById(GameStateService.GAME_STATE_ID)).thenReturn(Optional.of(persistedState));
 
             // then

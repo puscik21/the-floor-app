@@ -26,6 +26,7 @@
         <exclude name="CommentDefaultAccessModifier"/>
         <exclude name="LocalVariableCouldBeFinal"/>
         <exclude name="MethodArgumentCouldBeFinal"/>
+        <exclude name="TooManyStaticImports"/>
     </rule>
 
     <!-- Design -->
