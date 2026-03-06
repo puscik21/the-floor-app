@@ -6,6 +6,9 @@ import {notifyError} from "../shared/utils/toast/notifier";
 import {fetchJson} from "../shared/utils/input/configFilesUtils";
 import useGameSocket from "../features/game/hooks/useGameSocket";
 import {fetchGameState, updateGameState} from "../shared/api/gameStateApi";
+import {useDispatch, useSelector} from "react-redux";
+import type {RootState} from "../store";
+import {setGameState as setGameStateAction} from "../store/gameSlice"; // TODO: Rename to 'setGameState' after migration to Redux
 
 const GameContext = createContext<GameContextValue | undefined>(undefined);
 
@@ -20,7 +23,9 @@ const defaultGameConfig: GameConfig = {
 };
 
 export const GameContextProvider = ({children}: { children: React.ReactNode }) => {
-    const [gameState, setGameStateLocal] = useState<GameState>('init');
+    const dispatch = useDispatch();
+    const gameState = useSelector((state: RootState) => state.game.gameState);
+    const socketStatus = useSelector((state: RootState) => state.game.socketStatus);
     const [winner, setWinner] = useState<Player | null>(null);
     const [gameConfig, setGameConfig] = useState<GameConfig>(defaultGameConfig); // TODO: fix - always first duel goes with default config ._.
 
@@ -31,17 +36,13 @@ export const GameContextProvider = ({children}: { children: React.ReactNode }) =
     }, []);
 
     useEffect(() => {
-        fetchGameState().then(setGameStateLocal);
-    }, []);
+        fetchGameState().then((state) => dispatch(setGameStateAction(state)));
+    }, [dispatch]);
 
     const setGameState = useCallback((state: GameState) => {
-        setGameStateLocal(state);
+        dispatch(setGameStateAction(state));
         updateGameState(state);
-    }, []);
-
-    const handleServerGameStateChange = useCallback((state: GameState) => {
-        setGameStateLocal(state);
-    }, []);
+    }, [dispatch]);
 
     const handleSetWinner = useCallback((player: Player | null) => setWinner(player), []);
     const handleStartGame = useCallback(() => setGameState('floor'), [setGameState]);
@@ -96,11 +97,11 @@ export const GameContextProvider = ({children}: { children: React.ReactNode }) =
         duelActions.addTimeBoostsToPlayerTimer(duelPlayer);
     }, [duelActions, mapActions]);
 
-    const {socketStatus, sendStartGame} = useGameSocket(handleServerGameStateChange);
+    const {sendStartGame} = useGameSocket();
 
     const value: GameContextValue = {
         general: {
-            gameState,
+            gameState, // TODO: get from Redux
             winner,
         },
         map: mapState,
@@ -114,7 +115,7 @@ export const GameContextProvider = ({children}: { children: React.ReactNode }) =
             ...duelActions,
         },
         config: gameConfig,
-        socket: {socketStatus},
+        socket: {socketStatus}, // TODO: get from Redux
     };
 
     return (

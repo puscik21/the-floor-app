@@ -1,9 +1,11 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { Client, type IMessage } from "@stomp/stompjs";
 import SockJS from "sockjs-client";
-import type { GameStartedEvent, SocketStatus, StartGameRequest } from "../types";
+import type { GameStartedEvent, StartGameRequest } from "../types";
 import type { GameState } from "../../../shared/types";
 import { notifyError, notifySuccess } from "../../../shared/utils/toast/notifier";
+import {useDispatch} from "react-redux";
+import {setGameState, setSocketStatus} from "../../../store/gameSlice";
 
 const WS_URL = "http://localhost:8080/ws";
 const TOPIC_GAME = "/topic/game";
@@ -14,15 +16,9 @@ interface GameStateMessage {
     state: GameState;
 }
 
-// TODO: use React Redux
-const useGameSocket = (onGameStateChange?: (state: GameState) => void) => {
-    const [socketStatus, setSocketStatus] = useState<SocketStatus>("disconnected");
+const useGameSocket = () => {
+    const dispatch = useDispatch();
     const clientRef = useRef<Client | null>(null);
-    const onGameStateChangeRef = useRef(onGameStateChange);
-
-    useEffect(() => {
-        onGameStateChangeRef.current = onGameStateChange;
-    }, [onGameStateChange]);
 
     const handleGameStarted = useCallback((message: IMessage) => {
         const event: GameStartedEvent = JSON.parse(message.body);
@@ -31,8 +27,8 @@ const useGameSocket = (onGameStateChange?: (state: GameState) => void) => {
 
     const handleGameStateChange = useCallback((message: IMessage) => {
         const {state}: GameStateMessage = JSON.parse(message.body);
-        onGameStateChangeRef.current?.(state);
-    }, []);
+        dispatch(setGameState(state));
+    }, [dispatch]);
 
     const connect = useCallback(() => {
         if (clientRef.current?.active) return;
@@ -45,24 +41,24 @@ const useGameSocket = (onGameStateChange?: (state: GameState) => void) => {
         });
 
         client.onConnect = () => {
-            setSocketStatus("connected");
+            dispatch(setSocketStatus("connected"));
             client.subscribe(TOPIC_GAME, handleGameStarted);
             client.subscribe(TOPIC_GAME_STATE, handleGameStateChange);
         };
 
-        client.onDisconnect = () => setSocketStatus("disconnected");
+        client.onDisconnect = () => dispatch(setSocketStatus("disconnected"));
         client.onStompError = (frame) => {
-            setSocketStatus("error");
+            dispatch(setSocketStatus("error"));
             notifyError("WebSocket error", frame.headers["message"]);
         };
 
         client.onWebSocketClose = () => {
-            if (client.active) setSocketStatus("connecting");
+            if (client.active) dispatch(setSocketStatus("connecting"));
         };
 
         clientRef.current = client;
         client.activate();
-    }, [handleGameStarted, handleGameStateChange]);
+    }, [dispatch, handleGameStarted, handleGameStateChange]);
 
     const disconnect = useCallback(() => {
         clientRef.current?.deactivate();
@@ -90,8 +86,7 @@ const useGameSocket = (onGameStateChange?: (state: GameState) => void) => {
         return () => disconnect();
     }, [connect, disconnect]);
 
-    return {socketStatus, sendStartGame};
+    return {sendStartGame};
 };
 
 export default useGameSocket;
-
