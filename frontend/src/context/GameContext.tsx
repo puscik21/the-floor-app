@@ -1,14 +1,14 @@
-import {createContext, useCallback, useContext, useEffect, useRef, useState} from 'react';
-import type {DuelPlayer, GameConfig, GameContextValue, GameState, Player} from '../shared/types';
-import {useGameDuelState} from '../features/duel/hooks/useGameDuelState';
-import {useGameMapState} from '../features/game/hooks/useGameMapState';
-import {notifyError} from "../shared/utils/toast/notifier";
-import {fetchJson} from "../shared/utils/input/configFilesUtils";
+import { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react';
+import type { DuelPlayer, GameConfig, GameContextValue, GameState, Player } from '../shared/types';
+import { useGameDuelState } from '../features/duel/hooks/useGameDuelState';
+import { useGameMapState } from '../features/game/hooks/useGameMapState';
+import { notifyError } from "../shared/utils/toast/notifier";
+import { fetchJson } from "../shared/utils/input/configFilesUtils";
 import useGameSocket from "../features/game/hooks/useGameSocket";
-import {fetchGameState, updateGameState} from "../shared/api/gameStateApi";
-import {useDispatch, useSelector} from "react-redux";
-import type {RootState} from "../store";
-import {setGameState as setGameStateAction} from "../store/gameSlice"; // TODO: Rename to 'setGameState' after migration to Redux
+import { fetchGameState, updateGameState } from "../shared/api/gameStateApi";
+import { useDispatch } from "react-redux";
+import { setGameState as setGameStateAction } from "../store/gameSlice";
+import { useAppSelector } from "../store/hook"; // TODO: Rename to 'setGameState' after migration to Redux
 
 const GameContext = createContext<GameContextValue | undefined>(undefined);
 
@@ -24,8 +24,8 @@ const defaultGameConfig: GameConfig = {
 
 export const GameContextProvider = ({children}: { children: React.ReactNode }) => {
     const dispatch = useDispatch();
-    const gameState = useSelector((state: RootState) => state.game.gameState);
-    const socketStatus = useSelector((state: RootState) => state.game.socketStatus);
+    const gameState = useAppSelector(state => state.game.gameState);
+    const socketStatus = useAppSelector(state => state.game.socketStatus);
     const [winner, setWinner] = useState<Player | null>(null);
     const [gameConfig, setGameConfig] = useState<GameConfig>(defaultGameConfig); // TODO: fix - always first duel goes with default config ._.
 

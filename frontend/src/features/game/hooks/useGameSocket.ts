@@ -4,8 +4,8 @@ import SockJS from "sockjs-client";
 import type { GameStartedEvent, StartGameRequest } from "../types";
 import type { GameState } from "../../../shared/types";
 import { notifyError, notifySuccess } from "../../../shared/utils/toast/notifier";
-import {useDispatch} from "react-redux";
-import {setGameState, setSocketStatus} from "../../../store/gameSlice";
+import { setGameState, setSocketStatus } from "../../../store/gameSlice";
+import { useAppDispatch } from "../../../store/hook";
 
 const WS_URL = "http://localhost:8080/ws";
 const TOPIC_GAME = "/topic/game";
@@ -17,7 +17,7 @@ interface GameStateMessage {
 }
 
 const useGameSocket = () => {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const clientRef = useRef<Client | null>(null);
 
     const handleGameStarted = useCallback((message: IMessage) => {
