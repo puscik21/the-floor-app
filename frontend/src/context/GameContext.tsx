@@ -7,8 +7,8 @@ import { fetchJson } from "../shared/utils/input/configFilesUtils";
 import useGameSocket from "../features/game/hooks/useGameSocket";
 import { fetchGameState, updateGameState } from "../shared/api/gameStateApi";
 import { useDispatch } from "react-redux";
-import { setGameState as setGameStateAction } from "../store/gameSlice";
-import { useAppSelector } from "../store/hook"; // TODO: Rename to 'setGameState' after migration to Redux
+import { setGameState as setGameStateAction } from "../store/gameSlice"; // TODO: Rename to 'setGameState' after migration to Redux
+import { useAppSelector } from "../store/hook";
 
 const GameContext = createContext<GameContextValue | undefined>(undefined);
 
