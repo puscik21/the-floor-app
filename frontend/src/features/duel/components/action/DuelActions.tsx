@@ -1,16 +1,18 @@
-import {Box, Button, type ButtonProps} from "@mui/material";
-import {styled} from "@mui/material/styles";
-import {useGameContext} from "../../../../context/GameContext";
-import {useCallback, useEffect} from "react";
+import { Box, Button, type ButtonProps } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import { useGameContext } from "../../../../context/GameContext";
+import { useCallback, useEffect } from "react";
+import { useAppSelector } from "../../../../store/hook";
 
 const DuelActions = () => {
-    const {general, duel, actions, config} = useGameContext();
+    const {duel, actions, config} = useGameContext();
+    const gameState = useAppSelector(state => state.game.gameState)
     const {passTimer, isPassPenaltyActive} = duel;
     const {handleCorrectAnswer, handlePass} = actions;
 
     const areKeysDisabled = useCallback(
-        () => isPassPenaltyActive || general.gameState !== "duel",
-        [general.gameState, isPassPenaltyActive]
+        () => isPassPenaltyActive || gameState !== "duel",
+        [gameState, isPassPenaltyActive]
     );
 
     const handleKeyDown = useCallback(

@@ -1,42 +1,42 @@
 import { Box, Container, GlobalStyles } from "@mui/material";
-import { useGameContext } from "../../../context/GameContext";
 import GameScreen from "../../duel/components/GameScreen";
 import FloorScreen from "./floor/FloorScreen";
 import WelcomeScreen from "./welcome/WelcomeScreen";
 import PodiumScreen from "../../duel/components/podium/PodiumScreen";
 import FinishedDuelScreen from "../../duel/components/finish/FinishedDuelScreen";
 import { styled } from "@mui/material/styles";
+import { useAppSelector } from "../../../store/hook";
 
 const GameContent = () => {
-    const gameState = useGameContext().general.gameState;
+    const gameState = useAppSelector(state => state.game.gameState)
 
     const renderContent = () => {
         switch (gameState) {
             case "ready":
             case "duel":
-                return <GameScreen />;
+                return <GameScreen/>;
             case "finished":
-                return <FinishedDuelScreen />;
+                return <FinishedDuelScreen/>;
             case "floor":
-                return <FloorScreen />;
+                return <FloorScreen/>;
             case "podium":
-                return <PodiumScreen />;
+                return <PodiumScreen/>;
             case "init":
             default:
-                return <WelcomeScreen />;
+                return <WelcomeScreen/>;
         }
     };
 
     const globalStyles = {
-        html: { height: "100%" },
-        body: { margin: 0, padding: 0, height: "100%", overflow: "hidden" },
-        "#root": { height: "100%" },
+        html: {height: "100%"},
+        body: {margin: 0, padding: 0, height: "100%", overflow: "hidden"},
+        "#root": {height: "100%"},
     };
 
     return (
         <ContentContainer>
-            <GlobalStyles styles={globalStyles} />
-            <Container maxWidth={false} disableGutters sx={{ textAlign: "center" }}>
+            <GlobalStyles styles={globalStyles}/>
+            <Container maxWidth={false} disableGutters sx={{textAlign: "center"}}>
                 {renderContent()}
             </Container>
         </ContentContainer>
