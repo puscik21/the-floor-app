@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import type { GameGrid, GameMapStateResult, GridCell, MapState } from "../types";
-import type {GameConfig, GameState, Player} from "../../../shared/types";
+import type { GameConfig, GameState, Player } from "../../../shared/types";
 import { initializeGrid } from "../components/floor/gridUtils";
 import { notifyWarning } from "../../../shared/utils/toast/notifier";
 import { fetchPlayers } from "../../../shared/api/playersApi";

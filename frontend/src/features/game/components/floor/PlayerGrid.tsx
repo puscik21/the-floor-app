@@ -2,7 +2,7 @@ import React from "react";
 import { Box, styled } from "@mui/material";
 import { useGameContext } from "../../../../context/GameContext";
 import PlayerCell from "./PlayerCell";
-import type {Player} from "../../../../shared/types";
+import type { Player } from "../../../../shared/types";
 
 const PlayerGrid = () => {
     const { grid, allPlayers } = useGameContext().map;

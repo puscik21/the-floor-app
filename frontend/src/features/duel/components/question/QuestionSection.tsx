@@ -9,13 +9,13 @@ const QuestionSection = () => {
     if (gameState === "ready") {
         return (
             <Container>
-                <StartDuelButton/>
+                <StartDuelButton />
             </Container>
         );
     } else if (gameState === "duel") {
         return (
             <Container>
-                <ImageSection/>
+                <ImageSection />
                 {/*{questionType === 'image' && <ImageSection/>}*/}
                 {/*{questionType === 'text' && <TextSection/>}*/}
                 {/* Handle unknown question type */}

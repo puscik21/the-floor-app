@@ -14,15 +14,15 @@ const ActionsSection = () => {
             <Grid container spacing={2} alignItems="flex-end">
                 <Grid item xs={3}>
                     {showTimeBoosts && (
-                        <PlayerTimeBoostSection playerName={challengerName} duelPlayer="challenger"/>
+                        <PlayerTimeBoostSection playerName={challengerName} duelPlayer="challenger" />
                     )}
                 </Grid>
                 <Grid item xs={6}>
-                    <DuelActions/>
+                    <DuelActions />
                 </Grid>
                 <Grid item xs={3}>
                     {showTimeBoosts && (
-                        <PlayerTimeBoostSection playerName={defenderName} duelPlayer="defender"/>
+                        <PlayerTimeBoostSection playerName={defenderName} duelPlayer="defender" />
                     )}
                 </Grid>
             </Grid>

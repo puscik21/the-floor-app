@@ -1,17 +1,17 @@
-import {Box, styled, Typography} from "@mui/material";
-import type {GridCell} from "../../types";
-import {useGameContext} from "../../../../context/GameContext";
-import type {Player} from "../../../../shared/types";
+import { Box, styled, Typography } from "@mui/material";
+import type { GridCell } from "../../types";
+import { useGameContext } from "../../../../context/GameContext";
+import type { Player } from "../../../../shared/types";
 
 interface PlayerCellProps {
     cell: GridCell;
     owner: Player | null;
 }
 
-const PlayerCell = ({cell, owner}: PlayerCellProps) => {
+const PlayerCell = ({ cell, owner }: PlayerCellProps) => {
     const {
-        map: {activeMapPlayer},
-        actions: {handleCellClick},
+        map: { activeMapPlayer },
+        actions: { handleCellClick },
     } = useGameContext();
 
     const isActive = owner?.name === activeMapPlayer?.name;
@@ -36,7 +36,7 @@ const Cell = styled(Box, {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    cursor: ${({isOwned}) => (isOwned ? "pointer" : "default")};
+    cursor: ${({ isOwned }) => (isOwned ? "pointer" : "default")};
     transition: transform 0.12s ease, box-shadow 0.3s ease, border 0.3s ease;
 
     background: radial-gradient(circle, rgba(0, 160, 255, 0.18), transparent 80%),
@@ -44,13 +44,13 @@ const Cell = styled(Box, {
     box-shadow: inset 0 0 12px rgba(0, 40, 110, 0.6);
 
     border: 2px solid rgba(255, 255, 255, 0.06);
-    z-index: ${({isActive}) => (isActive ? 10 : 1)};
+    z-index: ${({ isActive }) => (isActive ? 10 : 1)};
 
     &:hover {
-        ${({isOwned, isActive}) =>
-                isOwned &&
-                !isActive &&
-                `
+        ${({ isOwned, isActive }) =>
+    isOwned &&
+    !isActive &&
+    `
             box-shadow: 
                 0 0 10px #ffffff, 
                 0 0 20px #ffffff,
@@ -59,9 +59,9 @@ const Cell = styled(Box, {
         `}
     }
 
-    ${({isActive}) =>
-            isActive &&
-            `
+    ${({ isActive }) =>
+    isActive &&
+    `
         border: 4px solid #17a2ff;
         box-shadow: 
             0 0 15px #17a2ff,

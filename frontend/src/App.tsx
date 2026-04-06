@@ -7,11 +7,11 @@ import { GameContextProvider } from "./context/GameContext";
 function App() {
     return (
         <ThemeProvider theme={darkTheme}>
-            <CssBaseline/>
+            <CssBaseline />
             <GameContextProvider>
-                <GameContent/>
+                <GameContent />
             </GameContextProvider>
-            <ToastContainer/>
+            <ToastContainer />
         </ThemeProvider>
     );
 }

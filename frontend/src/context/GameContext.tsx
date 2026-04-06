@@ -22,7 +22,7 @@ const defaultGameConfig: GameConfig = {
     shufflePlayers: false
 };
 
-export const GameContextProvider = ({children}: { children: React.ReactNode }) => {
+export const GameContextProvider = ({ children }: { children: React.ReactNode }) => {
     const dispatch = useDispatch();
     const gameState = useAppSelector(state => state.game.gameState);
     const [winner, setWinner] = useState<Player | null>(null);
@@ -96,7 +96,7 @@ export const GameContextProvider = ({children}: { children: React.ReactNode }) =
         duelActions.addTimeBoostsToPlayerTimer(duelPlayer);
     }, [duelActions, mapActions]);
 
-    const {sendStartGame} = useGameSocket();
+    const { sendStartGame } = useGameSocket();
 
     const value: GameContextValue = {
         general: {

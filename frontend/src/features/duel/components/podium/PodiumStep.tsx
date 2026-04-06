@@ -55,7 +55,6 @@ const Container = styled(Box)<PodiumStepStyleProps>`
             order: ${styles.order};
         `;
     }}
-
     &::after {
         content: '';
         position: absolute;

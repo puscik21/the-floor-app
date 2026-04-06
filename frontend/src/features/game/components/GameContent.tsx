@@ -14,16 +14,16 @@ const GameContent = () => {
         switch (gameState) {
             case "ready":
             case "duel":
-                return <GameScreen/>;
+                return <GameScreen />;
             case "finished":
-                return <FinishedDuelScreen/>;
+                return <FinishedDuelScreen />;
             case "floor":
-                return <FloorScreen/>;
+                return <FloorScreen />;
             case "podium":
-                return <PodiumScreen/>;
+                return <PodiumScreen />;
             case "init":
             default:
-                return <WelcomeScreen/>;
+                return <WelcomeScreen />;
         }
     };
 
@@ -35,7 +35,7 @@ const GameContent = () => {
 
     return (
         <ContentContainer>
-            <GlobalStyles styles={globalStyles}/>
+            <GlobalStyles styles={globalStyles} />
             <Container maxWidth={false} disableGutters sx={{ textAlign: "center" }}>
                 {renderContent()}
             </Container>

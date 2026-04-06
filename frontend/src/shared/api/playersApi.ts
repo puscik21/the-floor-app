@@ -1,6 +1,6 @@
 import api from "./apiInstance";
 import { notifyError } from "../utils/toast/notifier";
-import type {Player} from "../types";
+import type { Player } from "../types";
 
 export const fetchPlayers = async (): Promise<Player[]> => {
     try {

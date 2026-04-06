@@ -1,7 +1,7 @@
-import type {DuelInfo, DuelPlayer} from "../features/duel/types";
-import type {GridCell, MapState} from "../features/game/types";
+import type { DuelInfo, DuelPlayer } from "../features/duel/types";
+import type { GridCell, MapState } from "../features/game/types";
 
-export type {DuelPlayer} from "../features/duel/types";
+export type { DuelPlayer } from "../features/duel/types";
 
 export interface GameConfig {
     initTimeSeconds: number;
