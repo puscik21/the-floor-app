@@ -22,10 +22,9 @@ const defaultGameConfig: GameConfig = {
     shufflePlayers: false
 };
 
-export const GameContextProvider = ({children}: { children: React.ReactNode }) => {
+export const GameContextProvider = ({ children }: { children: React.ReactNode }) => {
     const dispatch = useDispatch();
     const gameState = useAppSelector(state => state.game.gameState);
-    const socketStatus = useAppSelector(state => state.game.socketStatus);
     const [winner, setWinner] = useState<Player | null>(null);
     const [gameConfig, setGameConfig] = useState<GameConfig>(defaultGameConfig); // TODO: fix - always first duel goes with default config ._.
 
@@ -97,11 +96,10 @@ export const GameContextProvider = ({children}: { children: React.ReactNode }) =
         duelActions.addTimeBoostsToPlayerTimer(duelPlayer);
     }, [duelActions, mapActions]);
 
-    const {sendStartGame} = useGameSocket();
+    const { sendStartGame } = useGameSocket();
 
     const value: GameContextValue = {
         general: {
-            gameState, // TODO: get from Redux
             winner,
         },
         map: mapState,
@@ -115,7 +113,6 @@ export const GameContextProvider = ({children}: { children: React.ReactNode }) =
             ...duelActions,
         },
         config: gameConfig,
-        socket: {socketStatus}, // TODO: get from Redux
     };
 
     return (

@@ -1,10 +1,10 @@
 import { styled } from "@mui/material/styles";
 import StartDuelButton from "./StartDuelButton";
 import ImageSection from "./ImageSection";
-import { useGameContext } from "../../../../context/GameContext";
+import { useAppSelector } from "../../../../store/hook";
 
 const QuestionSection = () => {
-    const gameState = useGameContext().general.gameState;
+    const gameState = useAppSelector(state => state.game.gameState)
 
     if (gameState === "ready") {
         return (

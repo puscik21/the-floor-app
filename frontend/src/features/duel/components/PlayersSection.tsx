@@ -74,8 +74,8 @@ const PlayerCard = styled(Card, {
     cursor: pointer;
 
     ${({ isActive }) =>
-        isActive &&
-        `
+            isActive &&
+            `
         border: 4px solid #17a2ff;
         box-shadow: 
             0 0 18px #17a2ff,

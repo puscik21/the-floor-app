@@ -7,7 +7,6 @@ import { notifyError, notifySuccess } from "../../../shared/utils/toast/notifier
 import { setGameState, setSocketStatus } from "../../../store/gameSlice";
 import { useAppDispatch } from "../../../store/hook";
 
-const WS_URL = "http://localhost:8080/ws";
 const TOPIC_GAME = "/topic/game";
 const TOPIC_GAME_STATE = "/topic/game-state";
 const DEST_GAME_START = "/app/game.start";
@@ -26,7 +25,7 @@ const useGameSocket = () => {
     }, []);
 
     const handleGameStateChange = useCallback((message: IMessage) => {
-        const {state}: GameStateMessage = JSON.parse(message.body);
+        const { state }: GameStateMessage = JSON.parse(message.body);
         dispatch(setGameState(state));
     }, [dispatch]);
 
@@ -34,7 +33,7 @@ const useGameSocket = () => {
         if (clientRef.current?.active) return;
 
         const client = new Client({
-            webSocketFactory: () => new SockJS(WS_URL),
+            webSocketFactory: () => new SockJS(getWebSocketUrl()),
             reconnectDelay: 5000,
             heartbeatIncoming: 4000,
             heartbeatOutgoing: 4000,
@@ -73,7 +72,7 @@ const useGameSocket = () => {
             return;
         }
 
-        const payload: StartGameRequest = {playerName};
+        const payload: StartGameRequest = { playerName };
         client.publish({
             destination: DEST_GAME_START,
             body: JSON.stringify(payload),
@@ -86,7 +85,14 @@ const useGameSocket = () => {
         return () => disconnect();
     }, [connect, disconnect]);
 
-    return {sendStartGame};
+    return { sendStartGame };
 };
+
+const getWebSocketUrl = () => {
+    const host = window.location.hostname;
+// const port = window.location.port || "8080"; // TODO: if local -> 8080, if prod then take it from 'location'
+    const port = "8080";
+    return `http://${host}:${port}/ws`;
+}
 
 export default useGameSocket;

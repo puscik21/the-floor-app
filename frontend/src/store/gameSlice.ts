@@ -1,6 +1,6 @@
-import {createSlice, type PayloadAction} from "@reduxjs/toolkit";
-import type {GameState} from "../shared/types";
-import type {SocketStatus} from "../features/game/types";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import type { GameState } from "../shared/types";
+import type { SocketStatus } from "../features/game/types";
 
 interface GameSliceState {
     gameState: GameState;
@@ -25,6 +25,6 @@ const gameSlice = createSlice({
     },
 });
 
-export const {setGameState, setSocketStatus} = gameSlice.actions;
+export const { setGameState, setSocketStatus } = gameSlice.actions;
 export default gameSlice.reducer;
 

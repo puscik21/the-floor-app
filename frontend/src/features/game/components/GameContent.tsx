@@ -1,14 +1,14 @@
 import { Box, Container, GlobalStyles } from "@mui/material";
-import { useGameContext } from "../../../context/GameContext";
 import GameScreen from "../../duel/components/GameScreen";
 import FloorScreen from "./floor/FloorScreen";
 import WelcomeScreen from "./welcome/WelcomeScreen";
 import PodiumScreen from "../../duel/components/podium/PodiumScreen";
 import FinishedDuelScreen from "../../duel/components/finish/FinishedDuelScreen";
 import { styled } from "@mui/material/styles";
+import { useAppSelector } from "../../../store/hook";
 
 const GameContent = () => {
-    const gameState = useGameContext().general.gameState;
+    const gameState = useAppSelector(state => state.game.gameState)
 
     const renderContent = () => {
         switch (gameState) {

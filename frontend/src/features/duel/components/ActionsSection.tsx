@@ -2,9 +2,11 @@ import { Box, Grid } from "@mui/material";
 import DuelActions from "./action/DuelActions";
 import { useGameContext } from "../../../context/GameContext";
 import PlayerTimeBoostSection from "./action/PlayerTimeBoostSection";
+import { useAppSelector } from "../../../store/hook";
 
 const ActionsSection = () => {
-    const showTimeBoosts = useGameContext().general.gameState === "ready";
+    const gameState = useAppSelector(state => state.game.gameState)
+    const showTimeBoosts = gameState === "ready";
     const { challengerName, defenderName } = useGameContext().duel;
 
     return (
