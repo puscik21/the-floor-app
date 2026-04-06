@@ -25,7 +25,7 @@ const useGameSocket = () => {
     }, []);
 
     const handleGameStateChange = useCallback((message: IMessage) => {
-        const {state}: GameStateMessage = JSON.parse(message.body);
+        const { state }: GameStateMessage = JSON.parse(message.body);
         dispatch(setGameState(state));
     }, [dispatch]);
 
@@ -72,7 +72,7 @@ const useGameSocket = () => {
             return;
         }
 
-        const payload: StartGameRequest = {playerName};
+        const payload: StartGameRequest = { playerName };
         client.publish({
             destination: DEST_GAME_START,
             body: JSON.stringify(payload),
@@ -85,7 +85,7 @@ const useGameSocket = () => {
         return () => disconnect();
     }, [connect, disconnect]);
 
-    return {sendStartGame};
+    return { sendStartGame };
 };
 
 const getWebSocketUrl = () => {

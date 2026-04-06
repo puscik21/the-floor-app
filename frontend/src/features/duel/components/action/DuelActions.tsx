@@ -5,10 +5,10 @@ import { useCallback, useEffect } from "react";
 import { useAppSelector } from "../../../../store/hook";
 
 const DuelActions = () => {
-    const {duel, actions, config} = useGameContext();
+    const { duel, actions, config } = useGameContext();
     const gameState = useAppSelector(state => state.game.gameState)
-    const {passTimer, isPassPenaltyActive} = duel;
-    const {handleCorrectAnswer, handlePass} = actions;
+    const { passTimer, isPassPenaltyActive } = duel;
+    const { handleCorrectAnswer, handlePass } = actions;
 
     const areKeysDisabled = useCallback(
         () => isPassPenaltyActive || gameState !== "duel",

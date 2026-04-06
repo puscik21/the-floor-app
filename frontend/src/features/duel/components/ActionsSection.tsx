@@ -7,7 +7,7 @@ import { useAppSelector } from "../../../store/hook";
 const ActionsSection = () => {
     const gameState = useAppSelector(state => state.game.gameState)
     const showTimeBoosts = gameState === "ready";
-    const {challengerName, defenderName} = useGameContext().duel;
+    const { challengerName, defenderName } = useGameContext().duel;
 
     return (
         <Box>

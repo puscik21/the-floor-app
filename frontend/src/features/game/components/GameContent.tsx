@@ -28,15 +28,15 @@ const GameContent = () => {
     };
 
     const globalStyles = {
-        html: {height: "100%"},
-        body: {margin: 0, padding: 0, height: "100%", overflow: "hidden"},
-        "#root": {height: "100%"},
+        html: { height: "100%" },
+        body: { margin: 0, padding: 0, height: "100%", overflow: "hidden" },
+        "#root": { height: "100%" },
     };
 
     return (
         <ContentContainer>
             <GlobalStyles styles={globalStyles}/>
-            <Container maxWidth={false} disableGutters sx={{textAlign: "center"}}>
+            <Container maxWidth={false} disableGutters sx={{ textAlign: "center" }}>
                 {renderContent()}
             </Container>
         </ContentContainer>
