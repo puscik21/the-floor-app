@@ -1,5 +1,5 @@
 import type {DuelInfo, DuelPlayer} from "../features/duel/types";
-import type {GridCell, MapState, SocketStatus} from "../features/game/types";
+import type {GridCell, MapState} from "../features/game/types";
 
 export type {DuelPlayer} from "../features/duel/types";
 
@@ -17,7 +17,6 @@ export interface GameConfig {
 export type GameState = "init" | "floor" | "ready" | "duel" | "finished" | "podium";
 
 export interface GeneralState {
-    gameState: GameState;
     winner: Player | null;
 }
 
@@ -44,15 +43,10 @@ export interface Player {
     timeBoostsUsed: number;
 }
 
-export interface SocketState {
-    socketStatus: SocketStatus;
-}
-
 export interface GameContextValue {
     general: GeneralState;
     map: MapState;
     duel: DuelInfo;
     actions: GameActions;
     config: GameConfig;
-    socket: SocketState;
 }
